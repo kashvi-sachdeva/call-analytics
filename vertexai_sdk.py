@@ -22,16 +22,17 @@ PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 LOCATION = os.getenv("GCP_LOCATION")
 
 # ------------------ Client Initialization ------------------
-def get_genai_client(mode="sdk", creds_path=None, project=None, location=None):
+def get_genai_client(mode="sdk", api_key=None, creds_path=None, project=None, location=None):
     """
     Returns a genai.Client configured for either:
     - 'sdk': API key based Gemini SDK
     - 'vertex': Vertex AI integration
     """
     if mode == "sdk":
-        if not GCP_API_KEY:
-            raise ValueError("GCP_API_KEY not found in environment")
-        return genai.Client(api_key=GCP_API_KEY)
+        key = api_key or os.getenv("GCP_API_KEY")
+        if not key:
+            raise ValueError("GCP_API_KEY not provided or found in environment")
+        return genai.Client(api_key=key)
     
     elif mode == "vertex":
         if creds_path:

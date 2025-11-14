@@ -27,8 +27,7 @@ if page == "Transcription":
                 tmp.write(uploaded_file.read())
                 tmp_path = tmp.name
             try:
-                client = get_genai_client(mode="sdk")
-                client.api_key = gcp_api_key  # Set API key dynamically
+                client = get_genai_client(mode="sdk", api_key=gcp_api_key)
                 transcript_json = transcribe_audio_parallel(tmp_path, client, chunk_length_sec=chunk_length_sec, max_workers=max_workers)
                 st.success(f"Transcription complete. {len(transcript_json)} entries.")
                 for entry in transcript_json:
