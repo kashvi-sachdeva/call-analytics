@@ -10,7 +10,7 @@ import google.genai as genai
 from google.genai.types import Part, GenerateContentConfig, ThinkingConfig
 from prompt_transcribe import transcript_prompt
 from response_schema import response_schema
-
+import time
 # ------------------ Setup Logging ------------------
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -233,6 +233,7 @@ def adjust_chunk_timestamps(transcripts):
 
 # ------------------ Main Parallel Transcription ------------------
 def transcribe_audio_parallel(audio_path, client, model="gemini-2.5-flash", chunk_length_sec=360, max_workers=4, thinking_tokens=0):
+    start= time.time()
     logger.info("Splitting audio into chunks...")
     chunk_files, duration = split_audio_ffmpeg(audio_path, chunk_length_sec)
     logger.info(f"Created {len(chunk_files)} chunks (total duration {format_time(duration)}).")
@@ -254,7 +255,9 @@ def transcribe_audio_parallel(audio_path, client, model="gemini-2.5-flash", chun
         json.dump(corrected_entries, f, indent=2, ensure_ascii=False)
 
     logger.info(f"Final transcript saved → {final_file}")
-    return corrected_entries
+    end = time.time()
+    logger.info(f"Transcription took {end - start:.2f} seconds.")
+    return corrected_entries, end-start
 
 # ------------------ Example Run ------------------
 if __name__ == "__main__":

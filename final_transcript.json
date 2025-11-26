@@ -1,282 +1,210 @@
 [
   {
     "start_time": "00:00",
-    "end_time": "00:01",
-    "speaker": "non_speech",
-    "utterance": "noise",
-    "loudness": -55.2,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "00:01",
-    "end_time": "00:03",
+    "end_time": "00:02",
     "speaker": "agent",
-    "utterance": "Hello, Nandeep.",
-    "loudness": -28.5,
+    "utterance": "Hello",
+    "loudness": -15.34,
     "sentiment": 0.0
   },
   {
-    "start_time": "00:03",
-    "end_time": "00:04",
+    "start_time": "00:02",
+    "end_time": "00:06",
     "speaker": "customer",
-    "utterance": "Yes, I Prakash.",
-    "loudness": -25.1,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "00:04",
-    "end_time": "00:07",
-    "speaker": "agent",
-    "utterance": "Hi. So, like we have sent your mail.",
-    "loudness": -27.8,
+    "utterance": "Yes, good evening. Am I speaking with Mr. Sandan from Odisa Talks?",
+    "loudness": -18.76,
     "sentiment": 0.0
   },
   {
     "start_time": "00:07",
-    "end_time": "00:11",
+    "end_time": "00:07",
     "speaker": "agent",
-    "utterance": "You will get a new mail from us.",
-    "loudness": -28.2,
+    "utterance": "Bol do",
+    "loudness": -16.23,
     "sentiment": 0.0
   },
   {
-    "start_time": "00:12",
-    "end_time": "00:15",
+    "start_time": "00:08",
+    "end_time": "00:12",
     "speaker": "customer",
-    "utterance": "Definitely, it's done. And I also checked with LSK.",
-    "loudness": -24.5,
+    "utterance": "Yes, I was speaking with Swati from Runo Technology.",
+    "loudness": -19.56,
     "sentiment": 0.0
   },
   {
-    "start_time": "00:16",
-    "end_time": "00:22",
-    "speaker": "customer",
-    "utterance": "So they are saying that their team will not be available now, so they will be able to take it up on Monday.",
-    "loudness": -25.0,
+    "start_time": "00:13",
+    "end_time": "00:13",
+    "speaker": "agent",
+    "utterance": "Achha, bataiye.",
+    "loudness": -17.89,
     "sentiment": 0.0
+  },
+  {
+    "start_time": "00:14",
+    "end_time": "00:21",
+    "speaker": "customer",
+    "utterance": "So, I was just going through your company profile and I see that currently you are hiring sales executives for your organization, right?",
+    "loudness": -21.34,
+    "sentiment": 0.12
   },
   {
     "start_time": "00:22",
-    "end_time": "00:23",
+    "end_time": "00:22",
     "speaker": "agent",
-    "utterance": "Monday?",
-    "loudness": -28.0,
+    "utterance": "Yeah.",
+    "loudness": -20.12,
     "sentiment": 0.0
   },
   {
-    "start_time": "00:24",
-    "end_time": "00:30",
+    "start_time": "00:23",
+    "end_time": "00:27",
     "speaker": "customer",
-    "utterance": "Yes, they were saying that the manager is out now, and Friday is already here.",
-    "loudness": -25.2,
+    "utterance": "So this call is regards to our product that is a team based call management CRM.",
+    "loudness": -22.56,
+    "sentiment": 0.23
+  },
+  {
+    "start_time": "00:28",
+    "end_time": "00:28",
+    "speaker": "agent",
+    "utterance": "Okay.",
+    "loudness": -21.78,
     "sentiment": 0.0
+  },
+  {
+    "start_time": "00:28",
+    "end_time": "00:29",
+    "speaker": "customer",
+    "utterance": "That will help you.",
+    "loudness": -23.45,
+    "sentiment": 0.15
+  },
+  {
+    "start_time": "00:30",
+    "end_time": "00:31",
+    "speaker": "agent",
+    "utterance": "Itne calls hamare nahi hote hain.",
+    "loudness": -20.98,
+    "sentiment": -0.34
   },
   {
     "start_time": "00:32",
-    "end_time": "00:34",
-    "speaker": "agent",
-    "utterance": "So the integration won't happen today?",
-    "loudness": -28.1,
+    "end_time": "00:32",
+    "speaker": "customer",
+    "utterance": "Okay.",
+    "loudness": -22.11,
     "sentiment": 0.0
   },
   {
-    "start_time": "00:34",
+    "start_time": "00:33",
+    "end_time": "00:34",
+    "speaker": "agent",
+    "utterance": "So daily mein kitna like",
+    "loudness": -21.56,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:35",
     "end_time": "00:36",
     "speaker": "customer",
-    "utterance": "No, it won't happen today. They will do it on Monday.",
-    "loudness": -25.0,
+    "utterance": "Five to ten calls in a minute.",
+    "loudness": -23.01,
     "sentiment": 0.0
   },
   {
     "start_time": "00:37",
+    "end_time": "00:38",
+    "speaker": "agent",
+    "utterance": "Okay.",
+    "loudness": -22.87,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:38",
     "end_time": "00:40",
-    "speaker": "agent",
-    "utterance": "No, if you ask this, it will be done, right?",
-    "loudness": -27.9,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "00:40",
-    "end_time": "00:45",
-    "speaker": "agent",
-    "utterance": "We can do the integration later. For the first call, we can do it on Monday.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "00:46",
-    "end_time": "00:48",
     "speaker": "customer",
-    "utterance": "For the first call, we can do it on Monday.",
-    "loudness": -25.0,
+    "utterance": "So the team size is also small, I believe.",
+    "loudness": -24.12,
+    "sentiment": 0.1
+  },
+  {
+    "start_time": "00:41",
+    "end_time": "00:43",
+    "speaker": "agent",
+    "utterance": "Ha, but our calling is not that much.",
+    "loudness": -22.34,
+    "sentiment": -0.15
+  },
+  {
+    "start_time": "00:44",
+    "end_time": "00:44",
+    "speaker": "customer",
+    "utterance": "Okay.",
+    "loudness": -23.56,
     "sentiment": 0.0
   },
   {
-    "start_time": "00:49",
+    "start_time": "00:45",
+    "end_time": "00:47",
+    "speaker": "agent",
+    "utterance": "What is your exactly what like",
+    "loudness": -22.9,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:47",
+    "end_time": "00:49",
+    "speaker": "customer",
+    "utterance": "media, media, not media line.",
+    "loudness": -24.05,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:50",
+    "end_time": "00:51",
+    "speaker": "agent",
+    "utterance": "Okay, media line.",
+    "loudness": -23.15,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:51",
+    "end_time": "00:52",
+    "speaker": "customer",
+    "utterance": "On.",
+    "loudness": -25.67,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:52",
+    "end_time": "00:53",
+    "speaker": "agent",
+    "utterance": "So, is there any",
+    "loudness": -24.34,
+    "sentiment": 0.0
+  },
+  {
+    "start_time": "00:53",
     "end_time": "00:56",
-    "speaker": "agent",
-    "utterance": "Yes, this is the main integration, inbound, outbound call activity, access key, secret key, this is what is needed, right?",
-    "loudness": -27.9,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "00:56",
-    "end_time": "00:57",
     "speaker": "customer",
-    "utterance": "Hmm.",
-    "loudness": -25.0,
+    "utterance": "call requirement?",
+    "loudness": -25.98,
     "sentiment": 0.0
   },
   {
     "start_time": "00:57",
-    "end_time": "01:02",
+    "end_time": "00:57",
     "speaker": "agent",
-    "utterance": "So if you ask this, this will be enough, we can do normal integration.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:05",
-    "end_time": "01:10",
-    "speaker": "customer",
-    "utterance": "Basically, they were saying that wait once, they will check the feasibility etc. on their end.",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:11",
-    "end_time": "01:15",
-    "speaker": "agent",
-    "utterance": "Feasibility is not an issue because we have already integrated many leads.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:16",
-    "end_time": "01:19",
-    "speaker": "agent",
-    "utterance": "So there is no simple integration in that.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:21",
-    "end_time": "01:25",
-    "speaker": "customer",
-    "utterance": "So then it's fine, I will, you have put this, right, what all you need?",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:26",
-    "end_time": "01:27",
-    "speaker": "agent",
-    "utterance": "Yes, Gokul has put it.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:28",
-    "end_time": "01:32",
-    "speaker": "agent",
-    "utterance": "Like, he has already put it. You check it once.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:33",
-    "end_time": "01:34",
-    "speaker": "customer",
     "utterance": "Okay, then.",
-    "loudness": -25.0,
+    "loudness": -24.56,
     "sentiment": 0.0
   },
   {
-    "start_time": "01:34",
-    "end_time": "01:38",
-    "speaker": "agent",
-    "utterance": "We will do this on Monday. The rest, if we finish today, it will be done.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:39",
-    "end_time": "01:49",
+    "start_time": "00:57",
+    "end_time": "00:58",
     "speaker": "customer",
-    "utterance": "Okay, then I will loop in the mail and tell Gokul once that from his end, for this basic integration, he should add one or two contact points, what all is needed.",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:51",
-    "end_time": "01:55",
-    "speaker": "agent",
-    "utterance": "Okay, he has put everything in one mail.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "01:56",
-    "end_time": "01:59",
-    "speaker": "agent",
-    "utterance": "Okay, I will do it. You approve that mail.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:00",
-    "end_time": "02:00",
-    "speaker": "agent",
-    "utterance": "I will do it.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:01",
-    "end_time": "02:03",
-    "speaker": "customer",
-    "utterance": "Okay, I will loop in. Now tag him and send it.",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:05",
-    "end_time": "02:05",
-    "speaker": "customer",
-    "utterance": "Second point.",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:06",
-    "end_time": "02:06",
-    "speaker": "agent",
-    "utterance": "Okay, I will do it now.",
-    "loudness": -28.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:07",
-    "end_time": "02:08",
-    "speaker": "customer",
-    "utterance": "Okay, okay, done.",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:09",
-    "end_time": "02:09",
-    "speaker": "customer",
-    "utterance": "Hey, sir.",
-    "loudness": -25.0,
-    "sentiment": 0.0
-  },
-  {
-    "start_time": "02:09",
-    "end_time": "02:10",
-    "speaker": "non_speech",
-    "utterance": "noise",
-    "loudness": -55.2,
-    "sentiment": 0.0
+    "utterance": "Thank you.",
+    "loudness": -26.12,
+    "sentiment": 0.2
   }
 ]
