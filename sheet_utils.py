@@ -9,9 +9,7 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 # Load service account info from Streamlit secrets
 SERVICE_INFO = st.secrets["gcp_service"]  # The section name in secrets.toml
 
-# Fix private key newlines
-private_key = SERVICE_INFO["private_key"].replace("\\n", "\n")
-SERVICE_INFO["private_key"] = private_key
+
 
 # Create credentials
 CREDS = Credentials.from_service_account_info(
