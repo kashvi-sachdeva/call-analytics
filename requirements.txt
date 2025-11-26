@@ -3,4 +3,6 @@ pydub
 ffmpeg-python
 google-genai
 python-dotenv
-pyaudioop
+audioop-lts
+openpyxl
+pandas

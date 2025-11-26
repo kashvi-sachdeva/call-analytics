@@ -15,7 +15,21 @@ page = st.sidebar.radio("Go to", ["Transcription", "Prompt", "Response Schema"])
 if page == "Transcription":
     st.sidebar.header("Configuration")
     gcp_api_key = st.sidebar.text_input("Google Gemini API Key", type="password")
-    model = st.sidebar.selectbox("Model", ["gemini-2.5-flash","gemini-2.5-flash-lite", "gemini-1.5-pro", "gemini-pro"])
+    model = st.sidebar.selectbox("Model", [
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-pro"
+    ])
+    thinking_disabled = (model == "gemini-2.5-flash-lite")
+
+    thinking_tokens = st.sidebar.number_input(
+        "Thinking Tokens",
+        min_value=0,
+        max_value=256,
+        value=100 if model == "gemini-2.5-flash" else 128 if model == "gemini-2.5-pro" else 0,
+        disabled=thinking_disabled,
+        help="Only supported for flash and pro models"
+    )
     chunk_length_sec = st.sidebar.number_input("Chunk Length (sec)", min_value=60, max_value=600, value=360)
     max_workers = st.sidebar.number_input("Max Workers", min_value=1, max_value=8, value=4)
     st.title("Google Gemini Audio Transcription")
@@ -28,8 +42,30 @@ if page == "Transcription":
                 tmp_path = tmp.name
             try:
                 client = get_genai_client(mode="sdk", api_key=gcp_api_key)
-                transcript_json = transcribe_audio_parallel(tmp_path, client, chunk_length_sec=chunk_length_sec, max_workers=max_workers)
+                transcript_json = transcribe_audio_parallel(tmp_path, client, chunk_length_sec=chunk_length_sec,model=model,thinking_tokens=None if thinking_disabled else thinking_tokens, max_workers=max_workers)
                 st.success(f"Transcription complete. {len(transcript_json)} entries.")
+                import pandas as pd
+                from io import BytesIO
+
+                # Convert to DataFrame
+                df = pd.DataFrame(transcript_json)
+
+                # Build Excel file in memory
+                output = BytesIO()
+                with pd.ExcelWriter(output, engine="openpyxl") as writer:
+                    df.to_excel(writer, index=False, sheet_name="Transcript")
+
+                # Naming format: audio filename + model
+                audio_name = os.path.splitext(uploaded_file.name)[0]
+                excel_filename = f"{audio_name}_{model}.xlsx"
+
+                # Download button
+                st.download_button(
+                    label="📥 Download Transcript as Excel",
+                    data=output.getvalue(),
+                    file_name=excel_filename,
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
                 for entry in transcript_json:
                     st.markdown(f"**{entry['start_time']} - {entry['end_time']}**: {entry['utterance']}")
                     if entry.get("speaker"):

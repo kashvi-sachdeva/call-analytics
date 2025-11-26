@@ -7,7 +7,7 @@ import ffmpeg
 from dotenv import load_dotenv
 from pydub import AudioSegment
 import google.genai as genai
-from google.genai.types import Part, GenerateContentConfig
+from google.genai.types import Part, GenerateContentConfig, ThinkingConfig
 from prompt_transcribe import transcript_prompt
 from response_schema import response_schema
 
@@ -91,9 +91,17 @@ def extract_transcript(response):
     except Exception as e:
         logger.error(f"Failed to extract transcript: {e}")
         return ""
-
+#------------------ Thinking Config ------------------
+def get_thinking_config(model_name):
+    if model_name == "gemini-2.5-flash":
+        return {"thinking": {"max_output_tokens": 100}}
+    elif model_name == "gemini-2.5-pro":
+        return {"thinking": {"max_output_tokens": 128}}
+    elif model_name == "gemini-2.5-flash-lite":
+        return None  # Lite does not support thinking
+    return None
 # ------------------ Transcription ------------------
-def transcribe_chunk(client, audio_file_path, chunk_number, chunk_length_sec, total_duration, model_name="gemini-2.5-flash", max_retries=3, retry_delay=5):
+def transcribe_chunk(client, audio_file_path, chunk_number, chunk_length_sec, total_duration, model_name="gemini-2.5-flash", thinking_tokens=0, max_retries=3, retry_delay=5):
     import time
     with open(audio_file_path, "rb") as f:
         byte_data = f.read()
@@ -105,17 +113,22 @@ def transcribe_chunk(client, audio_file_path, chunk_number, chunk_length_sec, to
 
     logger.debug(f"[Chunk {chunk_number}] Sending audio to Gemini {model_name}")
     attempt = 0
+    
+    config_kwargs = {
+        "temperature": 0,
+        "top_p": 0.9,
+        "response_mime_type": "application/json",
+        "response_schema": response_schema
+    }
+    if thinking_tokens and thinking_tokens > 0:
+        config_kwargs["thinking_config"] =ThinkingConfig(thinking_budget=thinking_tokens) 
+    logger.debug(f"=================================== Config: {config_kwargs}")
     while attempt < max_retries:
         try:
             response = client.models.generate_content(
                 model=model_name,
                 contents=[transcript_prompt, audio_content],
-                config=GenerateContentConfig(
-                    temperature=0,
-                    top_p=0.9,
-                    response_mime_type="application/json",
-                    response_schema=response_schema
-                )
+                config=GenerateContentConfig(**config_kwargs)
             )
             chunk_text = extract_transcript(response)
             start_time = (chunk_number - 1) * chunk_length_sec
@@ -219,7 +232,7 @@ def adjust_chunk_timestamps(transcripts):
     return corrected_entries
 
 # ------------------ Main Parallel Transcription ------------------
-def transcribe_audio_parallel(audio_path, client, chunk_length_sec=360, max_workers=4):
+def transcribe_audio_parallel(audio_path, client, model="gemini-2.5-flash", chunk_length_sec=360, max_workers=4, thinking_tokens=0):
     logger.info("Splitting audio into chunks...")
     chunk_files, duration = split_audio_ffmpeg(audio_path, chunk_length_sec)
     logger.info(f"Created {len(chunk_files)} chunks (total duration {format_time(duration)}).")
@@ -227,7 +240,7 @@ def transcribe_audio_parallel(audio_path, client, chunk_length_sec=360, max_work
     transcripts = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_chunk = {
-            executor.submit(transcribe_chunk, client, chunk, idx+1, chunk_length_sec, duration): chunk
+            executor.submit(transcribe_chunk, client, chunk, idx+1, chunk_length_sec, duration, model, thinking_tokens=thinking_tokens): chunk
             for idx, chunk in enumerate(chunk_files)
         }
         for future in as_completed(future_to_chunk):
