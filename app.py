@@ -219,6 +219,7 @@ if page == "Transcription":
     chunk_length_sec = st.sidebar.number_input("Chunk Length (sec)", min_value=60, max_value=600, value=360)
     max_workers = st.sidebar.number_input("Max Workers", min_value=1, max_value=8, value=4)
     type_of_call= st.sidebar.text_input("Type of Call")
+    agent_names = st.sidebar.text_input("Agent Names (comma-separated)", help="Helps with speaker identification")
     st.title("Google Gemini Audio Transcription")
     st.write("Upload an audio file (mp3, wav, aac)")
     uploaded_file = st.file_uploader("Choose an audio file", type=["mp3", "wav", "aac"])
@@ -233,7 +234,7 @@ if page == "Transcription":
                 total_duration_sec=get_audio_duration_seconds(tmp_path)
                 st.info(f"Audio duration: {total_duration_sec} seconds")
                 client = get_genai_client(mode="sdk", api_key=gcp_api_key)
-                transcript_json, latency = transcribe_audio_parallel(tmp_path, client, chunk_length_sec=chunk_length_sec,model=model,thinking_tokens=None if thinking_disabled else thinking_tokens, max_workers=max_workers)
+                transcript_json, latency = transcribe_audio_parallel(tmp_path, client, chunk_length_sec=chunk_length_sec,model=model,thinking_tokens=None if thinking_disabled else thinking_tokens, max_workers=max_workers, name=agent_names)
                 st.success(f"Transcription complete. {len(transcript_json)} entries.")
                 import pandas as pd
                 # from io import BytesIO

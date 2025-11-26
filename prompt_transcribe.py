@@ -1,7 +1,7 @@
 transcript_prompt = """\
 You are an expert audio analyst and attentive listener.  
 You are given an audio file containing a conversation between two people:  
-- "agent" (from Runo CRM)  
+- "agent" (from Runo CRM) , named {name}
 - "customer" (potential or existing)  
 
 Your task is to produce a **structured JSON analysis** of the audio by:  

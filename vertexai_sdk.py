@@ -101,7 +101,7 @@ def get_thinking_config(model_name):
         return None  # Lite does not support thinking
     return None
 # ------------------ Transcription ------------------
-def transcribe_chunk(client, audio_file_path, chunk_number, chunk_length_sec, total_duration, model_name="gemini-2.5-flash", thinking_tokens=0, max_retries=3, retry_delay=5):
+def transcribe_chunk(client, audio_file_path, chunk_number, chunk_length_sec, total_duration, model_name="gemini-2.5-flash", thinking_tokens=0, max_retries=3, retry_delay=5, name=""   ):
     import time
     with open(audio_file_path, "rb") as f:
         byte_data = f.read()
@@ -123,11 +123,13 @@ def transcribe_chunk(client, audio_file_path, chunk_number, chunk_length_sec, to
     if thinking_tokens and thinking_tokens > 0:
         config_kwargs["thinking_config"] =ThinkingConfig(thinking_budget=thinking_tokens) 
     logger.debug(f"=================================== Config: {config_kwargs}")
+    transcript_prompt_formatted = transcript_prompt.format(name=name)
+    logger.debug(f"=================================== Prompt: {transcript_prompt_formatted}")
     while attempt < max_retries:
         try:
             response = client.models.generate_content(
                 model=model_name,
-                contents=[transcript_prompt, audio_content],
+                contents=[transcript_prompt_formatted, audio_content],
                 config=GenerateContentConfig(**config_kwargs)
             )
             chunk_text = extract_transcript(response)
@@ -232,7 +234,7 @@ def adjust_chunk_timestamps(transcripts):
     return corrected_entries
 
 # ------------------ Main Parallel Transcription ------------------
-def transcribe_audio_parallel(audio_path, client, model="gemini-2.5-flash", chunk_length_sec=360, max_workers=4, thinking_tokens=0):
+def transcribe_audio_parallel(audio_path, client, model="gemini-2.5-flash", chunk_length_sec=360, max_workers=4, thinking_tokens=0, name=""):
     start= time.time()
     logger.info("Splitting audio into chunks...")
     chunk_files, duration = split_audio_ffmpeg(audio_path, chunk_length_sec)
@@ -241,7 +243,7 @@ def transcribe_audio_parallel(audio_path, client, model="gemini-2.5-flash", chun
     transcripts = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_chunk = {
-            executor.submit(transcribe_chunk, client, chunk, idx+1, chunk_length_sec, duration, model, thinking_tokens=thinking_tokens): chunk
+            executor.submit(transcribe_chunk, client, chunk, idx+1, chunk_length_sec, duration, model, thinking_tokens=thinking_tokens, name=name): chunk
             for idx, chunk in enumerate(chunk_files)
         }
         for future in as_completed(future_to_chunk):

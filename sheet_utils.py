@@ -10,7 +10,6 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SERVICE_INFO = st.secrets["gcp_service"]  # The section name in secrets.toml
 
 
-
 # Create credentials
 CREDS = Credentials.from_service_account_info(
     SERVICE_INFO,
